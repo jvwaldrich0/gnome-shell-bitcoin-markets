@@ -13,6 +13,7 @@ export function format(value: number | undefined, { base, quote, format }): stri
     raw: value,
     b: base,
     btc: '₿',
+    btcicon: '[[BTCICON]]', // Special marker for icon display
     bs: getSymbol(base) || base,
     qs: getSymbol(quote) || quote,
     moscow: getMoscowTime(value),
@@ -63,6 +64,7 @@ export function tooltipText(_: GettextFunc) {
     ['b', _('Base currency code')],
     ['bs', _('Base currency symbol')],
     ['btc', _('Bitcoin symbol (₿)')],
+    ['btcicon', _('Bitcoin icon (₿)')],
     ['v', _('formatted value with defaults')],
     ['mv', _('formatted value with defaults, divided by ') + (1000).toLocaleString()],
     ['kv', _('formatted value with defaults, multiplied by ') + (1000).toLocaleString()],

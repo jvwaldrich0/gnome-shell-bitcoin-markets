@@ -64,11 +64,12 @@ gnome-tweak-tool.
 
 ### Base options
 
-| option | result                                       |
-| ------ | -------------------------------------------- |
-| b      | base currency code                           |
-| bs     | base currency symbol \|\| base currency code |
-| btc    | btc symbol                                   |
+| option  | result                                       |
+| ------- | -------------------------------------------- |
+| b       | base currency code                           |
+| bs      | base currency symbol \|\| base currency code |
+| btc     | btc symbol                                   |
+| btcicon | bitcoin icon (₿)                             |
 
 ### Value options
 
@@ -93,6 +94,15 @@ gnome-tweak-tool.
 | ------ | ---------------------------------------------- |
 | q      | quote currency code                            |
 | qs     | quote currency symbol \|\| quote currency code |
+
+### Example format strings
+
+- `{v} {qs}` - displays value with quote symbol (e.g., "50000.00 $")
+- `{b}/{q} {v}` - displays base/quote pair with value (e.g., "BTC/USD 50000.00")
+- `{btcicon} {v} {qs}` - displays Bitcoin icon with value and quote symbol
+- `{btc} {v}` - displays Bitcoin symbol (₿) with value
+
+**Note:** The `{btcicon}` option displays an SVG Bitcoin icon in the panel. When used, the icon appears alongside your formatted text.
 
 ## Development
 
