@@ -26,7 +26,7 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-var _SuppressedError = typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
     var e = new Error(message);
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
@@ -70,7 +70,7 @@ function commonjsRequire () {
 	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
 }
 
-var stringFormat = createCommonjsModule(function (module) {
+createCommonjsModule(function (module) {
 void function(global) {
 
   //  ValueError :: String -> Error
@@ -174,6 +174,7 @@ function tooltipText(_) {
         ['b', _('Base currency code')],
         ['bs', _('Base currency symbol')],
         ['btc', _('Bitcoin symbol (₿)')],
+        ['btcicon', _('Bitcoin icon (₿)')],
         ['v', _('formatted value with defaults')],
         ['mv', _('formatted value with defaults, divided by ') + (1000).toLocaleString()],
         ['kv', _('formatted value with defaults, multiplied by ') + (1000).toLocaleString()],
@@ -194,7 +195,7 @@ function tooltipText(_) {
 /**
  * Api definitions
  */
-class Api {
+class Api$t {
     tickers = [];
     getLabel({ base, quote }) {
         return `${this.apiName} ${base}/${quote}`;
@@ -225,7 +226,7 @@ class Api {
     }
 }
 
-class Api$1 extends Api {
+class Api$s extends Api$t {
     apiName = 'Binance';
     apiDocs = [['API Docs', 'https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker']];
     interval = 15;
@@ -240,7 +241,7 @@ class Api$1 extends Api {
     }
 }
 
-class Api$2 extends Api {
+class Api$r extends Api$t {
     apiName = 'Binance Futures';
     apiDocs = [
         [
@@ -260,7 +261,7 @@ class Api$2 extends Api {
     }
 }
 
-class Api$3 extends Api {
+class Api$q extends Api$t {
     apiName = 'Bit2C';
     apiDocs = [['API Docs', 'https://bit2c.co.il/home/api']];
     interval = 10; // unknown, guessing
@@ -278,7 +279,7 @@ class Api$3 extends Api {
     }
 }
 
-class Api$4 extends Api {
+class Api$p extends Api$t {
     apiName = 'Bitfinex';
     apiDocs = [
         ['API Docs', 'https://docs.bitfinex.com/v1/reference#rest-public-ticker'],
@@ -318,7 +319,7 @@ class Api$4 extends Api {
     }
 }
 
-class Api$5 extends Api {
+class Api$o extends Api$t {
     apiName = 'BitMEX';
     apiDocs = [['API Docs', 'https://www.bitmex.com/app/restAPI']];
     // ```
@@ -344,7 +345,7 @@ class Api$5 extends Api {
     }
 }
 
-class Api$6 extends Api {
+class Api$n extends Api$t {
     apiName = 'BitPay';
     apiDocs = [['API Docs', 'https://bitpay.com/api']];
     interval = 60; // unclear, should be safe
@@ -360,7 +361,22 @@ class Api$6 extends Api {
     }
 }
 
-class Api$7 extends Api {
+class Api$m extends Api$t {
+    apiName = 'Bitkub';
+    apiDocs = [['API Docs', 'https://github.com/bitkub/bitkub-official-api-docs/blob/master/restful-api.md#get-apimarketbids']];
+    interval = 60; // unclear, should be safe
+    getUrl({ base, quote }) {
+        return 'https://api.bitkub.com/api/market/bids?lmt=1&sym=' + `${quote}_${base}`.toLowerCase();
+    }
+    getLast(data) {
+        return data.result[0][3]; // rate
+    }
+    getDefaultTicker() {
+        return { base: 'BTC', quote: 'THB' };
+    }
+}
+
+class Api$l extends Api$t {
     apiName = 'Bitso';
     apiDocs = [
         ['API Docs', 'https://bitso.com/api_info#http-api-responses'],
@@ -380,7 +396,7 @@ class Api$7 extends Api {
     }
 }
 
-class Api$8 extends Api {
+class Api$k extends Api$t {
     apiName = 'Bitstamp';
     apiDocs = [['API Docs', 'https://www.bitstamp.net/api/']];
     // Quote 2013-08-09  ---  https://www.bitstamp.net/api/
@@ -395,7 +411,7 @@ class Api$8 extends Api {
     }
 }
 
-class Api$9 extends Api {
+class Api$j extends Api$t {
     apiName = 'Bittrex';
     apiDocs = [['API Docs', 'https://bittrex.github.io/api/v3#operation--markets--marketSymbol--ticker-get']];
     interval = 15;
@@ -407,7 +423,7 @@ class Api$9 extends Api {
     }
 }
 
-class Api$a extends Api {
+class Api$i extends Api$t {
     apiName = 'Buda';
     apiDocs = [['API Docs', 'https://api.buda.com/#la-api-de-buda-com']];
     interval = 60;
@@ -422,7 +438,7 @@ class Api$a extends Api {
     }
 }
 
-class Api$b extends Api {
+class Api$h extends Api$t {
     apiName = 'BTCMarkets';
     apiDocs = [
         ['API Docs', 'https://github.com/BTCMarkets/API/wiki/Market-data-API'],
@@ -444,7 +460,7 @@ class Api$b extends Api {
     }
 }
 
-class Api$c extends Api {
+class Api$g extends Api$t {
     apiName = 'CEX.IO';
     apiDocs = [
         ['API Docs', 'https://cex.io/rest-api#ticker'],
@@ -462,7 +478,7 @@ class Api$c extends Api {
     }
 }
 
-class Api$d extends Api {
+class Api$f extends Api$t {
     apiName = 'Coinbase';
     apiDocs = [['API Docs', 'https://developers.coinbase.com/api/v2#exchange-rates']];
     interval = 60; // unclear, should be safe
@@ -483,7 +499,7 @@ class Api$d extends Api {
     }
 }
 
-class Api$e extends Api {
+class Api$e extends Api$t {
     apiName = 'CoinGecko';
     apiDocs = [
         ['API Docs', 'https://www.coingecko.com/api/docs/v3#/coins/get_coins_list'],
@@ -513,7 +529,7 @@ class Api$e extends Api {
     }
 }
 
-class Api$f extends Api {
+class Api$d extends Api$t {
     apiName = 'CryptoCompare';
     apiDocs = [['API Docs', 'https://min-api.cryptocompare.com/documentation']];
     interval = 15;
@@ -528,7 +544,7 @@ class Api$f extends Api {
     }
 }
 
-class Api$g extends Api {
+class Api$c extends Api$t {
     apiName = 'FTX exchange';
     apiDocs = [['API Docs', 'https://docs.ftx.com/#get-markets']];
     interval = 15;
@@ -540,7 +556,7 @@ class Api$g extends Api {
     }
 }
 
-class Api$h extends Api {
+class Api$b extends Api$t {
     apiName = 'Gate.io';
     apiDocs = [['API Docs', 'https://www.gate.io/docs/developers/apiv4']];
     interval = 60; // unknown, guessing
@@ -558,7 +574,7 @@ class Api$h extends Api {
     }
 }
 
-class Api$i extends Api {
+class Api$a extends Api$t {
     apiName = 'HitBTC';
     apiDocs = [['API Docs', 'https://api.hitbtc.com/']];
     interval = 15;
@@ -570,7 +586,7 @@ class Api$i extends Api {
     }
 }
 
-class Api$j extends Api {
+class Api$9 extends Api$t {
     apiName = 'Huobi';
     apiDocs = [['API Docs', 'https://huobiapi.github.io/docs/spot/v1/en/#introduction']];
     // Each API Key can send maximum of 100 https requests within 10 seconds
@@ -590,7 +606,7 @@ class Api$j extends Api {
     }
 }
 
-class Api$k extends Api {
+class Api$8 extends Api$t {
     apiName = 'Kraken';
     apiDocs = [
         ['API Docs', 'https://www.kraken.com/help/api#public-market-data'],
@@ -615,7 +631,7 @@ class Api$k extends Api {
     }
 }
 
-class Api$l extends Api {
+class Api$7 extends Api$t {
     apiName = 'Kucoin';
     apiDocs = [['API Docs', 'https://docs.kucoin.com/']];
     interval = 15;
@@ -633,7 +649,7 @@ class Api$l extends Api {
     }
 }
 
-class Api$m extends Api {
+class Api$6 extends Api$t {
     apiName = 'MEXC';
     apiDocs = [['API Docs', 'https://mexcdevelop.github.io/apidocs/spot_v3_en']];
     interval = 10; // unknown, guessing
@@ -649,7 +665,7 @@ class Api$m extends Api {
     }
 }
 
-class Api$n extends Api {
+class Api$5 extends Api$t {
     apiName = 'Nobitex';
     apiDocs = [['API Docs', 'https://apidocs.nobitex.ir/#quickstart']];
     interval = 15;
@@ -664,7 +680,7 @@ class Api$n extends Api {
     }
 }
 
-class Api$o extends Api {
+class Api$4 extends Api$t {
     apiName = 'Paymium';
     apiDocs = [['API Docs', 'https://github.com/Paymium/api-documentation#ticker']];
     interval = 60; // unclear, should be safe
@@ -683,21 +699,6 @@ class Api$o extends Api {
     }
     getDefaultTicker() {
         return { base: 'BTC', quote: 'EUR' };
-    }
-}
-
-class Api$p extends Api {
-    apiName = 'Bitkub';
-    apiDocs = [['API Docs', 'https://github.com/bitkub/bitkub-official-api-docs/blob/master/restful-api.md#get-apimarketbids']];
-    interval = 60; // unclear, should be safe
-    getUrl({ base, quote }) {
-      return 'https://api.bitkub.com/api/market/bids?lmt=1&sym=' + `${quote}_${base}`.toLowerCase();
-    }
-    getLast(data) {
-      return data.result[0][3]; // rate
-    }
-    getDefaultTicker() {
-      return { base: 'BTC', quote: 'THB' };
     }
 }
 
@@ -720,7 +721,7 @@ function getTokenInfo(code) {
     }
     return tokenInfo[code];
 }
-class Api$q extends Api {
+class Api$3 extends Api$t {
     apiName = 'TomoX(TomoChain)';
     apiDocs = [['API Docs', 'https://apidocs.tomochain.com/#tomodex-apis-trades']];
     interval = 15;
@@ -743,7 +744,7 @@ class Api$q extends Api {
     }
 }
 
-class Api$r extends Api {
+class Api$2 extends Api$t {
     apiName = 'VccExchange(Vietnam)';
     apiDocs = [['API Docs', 'https://vcc.exchange/api']];
     interval = 15;
@@ -761,7 +762,7 @@ class Api$r extends Api {
     }
 }
 
-class Api$s extends Api {
+class Api$1 extends Api$t {
     apiName = 'Bybit';
     apiDocs = [
         ['API Docs', 'https://bybit-exchange.github.io/docs/v5/market/tickers'],
@@ -787,7 +788,7 @@ class Api$s extends Api {
     }
 }
 
-class Api$t extends Api {
+class Api extends Api$t {
     apiName = 'Bybit Perpetual';
     apiDocs = [
         ['API Docs', 'https://bybit-exchange.github.io/docs/v5/market/tickers'],
@@ -814,36 +815,36 @@ class Api$t extends Api {
 }
 
 const Providers = {
-    binance: new Api$1(),
-    binanceFutures: new Api$2(),
-    bit2c: new Api$3(),
-    bitfinex: new Api$4(),
-    bitmex: new Api$5(),
-    bitpay: new Api$6(),
-    bitkub: new Api$p(),
-    bitso: new Api$7(),
-    bitstamp: new Api$8(),
-    bittrex: new Api$9(),
-    btcmarkets: new Api$b(),
-    buda: new Api$a(),
-    bybit: new Api$s(),
-    bybitPerpetual: new Api$t(),
-    cexio: new Api$c(),
-    coinbase: new Api$d(),
+    binance: new Api$s(),
+    binanceFutures: new Api$r(),
+    bit2c: new Api$q(),
+    bitfinex: new Api$p(),
+    bitmex: new Api$o(),
+    bitpay: new Api$n(),
+    bitkub: new Api$m(),
+    bitso: new Api$l(),
+    bitstamp: new Api$k(),
+    bittrex: new Api$j(),
+    btcmarkets: new Api$h(),
+    buda: new Api$i(),
+    bybit: new Api$1(),
+    bybitPerpetual: new Api(),
+    cexio: new Api$g(),
+    coinbase: new Api$f(),
     coingecko: new Api$e(),
-    cryptocompare: new Api$f(),
-    ftx: new Api$g(),
-    gate: new Api$h(),
-    hitbtc: new Api$i(),
-    huobi: new Api$j(),
-    kraken: new Api$k(),
-    kucoin: new Api$l(),
-    mexc: new Api$m(),
-    nobitex: new Api$n(),
-    paymium: new Api$o(),
-    poloniex: new Api$6(),
-    tomox: new Api$q(),
-    vccexchange: new Api$r(),
+    cryptocompare: new Api$d(),
+    ftx: new Api$c(),
+    gate: new Api$b(),
+    hitbtc: new Api$a(),
+    huobi: new Api$9(),
+    kraken: new Api$8(),
+    kucoin: new Api$7(),
+    mexc: new Api$6(),
+    nobitex: new Api$5(),
+    paymium: new Api$4(),
+    poloniex: new Api$n(),
+    tomox: new Api$3(),
+    vccexchange: new Api$2(),
 };
 function getProvider(name) {
     if (name in Providers) {
@@ -854,7 +855,7 @@ function getProvider(name) {
     }
 }
 
-function makeConfigRow(description, widget) {
+function makeConfigRow$1(description, widget) {
     const box = new Gtk.Box({
         orientation: Gtk.Orientation.HORIZONTAL,
         margin_bottom: 8,
@@ -884,7 +885,7 @@ function debounce(milliseconds, func) {
         });
     };
 }
-let ComboBoxView = class ComboBoxView extends GObject.Object {
+let ComboBoxView$1 = class ComboBoxView extends GObject.Object {
     static metaInfo = {
         GTypeName: 'ComboBoxView',
         Signals: {
@@ -931,9 +932,9 @@ let ComboBoxView = class ComboBoxView extends GObject.Object {
         });
     }
 };
-ComboBoxView = __decorate([
+ComboBoxView$1 = __decorate([
     registerGObjectClass
-], ComboBoxView);
+], ComboBoxView$1);
 class BaseProviderConfigView {
     gettext;
     _api;
@@ -970,7 +971,7 @@ class BaseProviderConfigView {
         this._widgets.push(w);
     }
     _addRow(label, widget) {
-        const rowWidget = makeConfigRow(label, widget);
+        const rowWidget = makeConfigRow$1(label, widget);
         this._addConfigWidget(rowWidget);
         return rowWidget;
     }
@@ -988,7 +989,7 @@ class BaseProviderConfigView {
             if (!entry.text) {
                 throw new Error();
             }
-            if (entry.text.length < 2) {
+            if (entry.text.length < 1) {
                 return;
             }
             this._indicatorConfig.set(key, entry.text.toUpperCase());
@@ -1026,8 +1027,8 @@ class BaseProviderConfigView {
 
 var BaseProviderConfigView$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    makeConfigRow: makeConfigRow,
-    get ComboBoxView () { return ComboBoxView; },
+    makeConfigRow: makeConfigRow$1,
+    get ComboBoxView () { return ComboBoxView$1; },
     BaseProviderConfigView: BaseProviderConfigView
 });
 
@@ -1147,7 +1148,7 @@ IndicatorCollectionModel = __decorate([
     registerGObjectClass
 ], IndicatorCollectionModel);
 
-const { ComboBoxView: ComboBoxView$1, makeConfigRow: makeConfigRow$1 } = BaseProviderConfigView$1;
+const { ComboBoxView, makeConfigRow } = BaseProviderConfigView$1;
 function getMarginAll(v) {
     return {
         margin_start: v,
@@ -1227,7 +1228,7 @@ class IndicatorConfigView {
         entry.connect('changed', () => {
             this._indicatorConfig.set('format', entry.text);
         });
-        return makeConfigRow$1(this.gettext('Format'), entry);
+        return makeConfigRow(this.gettext('Format'), entry);
     }
     _confProvider() {
         const preset = this._indicatorConfig.get('api');
@@ -1241,9 +1242,9 @@ class IndicatorConfigView {
                 o.active = true;
             }
         });
-        const view = new ComboBoxView$1(options);
+        const view = new ComboBoxView(options);
         view.connect('changed', (view, api) => this._selectApi(api));
-        return makeConfigRow$1(this.gettext('Provider'), view.widget);
+        return makeConfigRow(this.gettext('Provider'), view.widget);
     }
     _confShowChange() {
         const preset = this._indicatorConfig.get('show_change') !== false;
@@ -1251,7 +1252,7 @@ class IndicatorConfigView {
         switchView.connect('notify::active', (obj) => {
             this._indicatorConfig.set('show_change', obj.active);
         });
-        return makeConfigRow$1(this.gettext('Show Change'), switchView);
+        return makeConfigRow(this.gettext('Show Change'), switchView);
     }
     _confShowBaseCurrency() {
         const preset = this._indicatorConfig.get('show_base_currency') === true;
@@ -1259,7 +1260,7 @@ class IndicatorConfigView {
         switchView.connect('notify::active', (obj) => {
             this._indicatorConfig.set('show_base_currency', obj.active);
         });
-        return makeConfigRow$1(this.gettext('Show Base Currency'), switchView);
+        return makeConfigRow(this.gettext('Show Base Currency'), switchView);
     }
 }
 let BitcoinMarketsSettingsWidget = class BitcoinMarketsSettingsWidget extends Gtk.Box {
@@ -1387,4 +1388,4 @@ class BitcoinMarketsSettings extends ExtensionPreferences {
     }
 }
 
-export default BitcoinMarketsSettings;
+export { BitcoinMarketsSettings as default };

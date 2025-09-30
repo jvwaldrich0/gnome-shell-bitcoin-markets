@@ -42,6 +42,7 @@ class MarketIndicatorView extends PanelMenu.Button {
   providerLabel!: string;
   _indicatorView!: St.Label;
   _statusView!: St.Label;
+  _iconView!: St.Icon;
   _popupItemStatus!: PopupMenuItemWithLabel;
   _popupItemSettings!: PopupMenu.PopupMenuItem;
 
@@ -80,7 +81,19 @@ class MarketIndicatorView extends PanelMenu.Button {
       style_class: 'status',
     });
 
+    // Create Bitcoin icon from SVG file
+    const iconPath = this.ext.dir.get_child('res').get_child('bitcoin-icon.svg').get_path();
+    const gicon = Gio.icon_new_for_string(iconPath!);
+    this._iconView = new St.Icon({
+      gicon: gicon,
+      y_align: Clutter.ActorAlign.CENTER,
+      style_class: 'bitcoin-icon',
+      icon_size: 16,
+      visible: false, // Hidden by default
+    });
+
     layout.add_child(this._statusView);
+    layout.add_child(this._iconView);
     layout.add_child(this._indicatorView);
 
     this.add_child(layout);
@@ -159,7 +172,16 @@ class MarketIndicatorView extends PanelMenu.Button {
   }
 
   _displayText(text) {
-    this._indicatorView.text = text;
+    // Check if the formatted text contains the btcicon marker
+    if (text.includes('[[BTCICON]]')) {
+      // Show the icon and remove the marker from text
+      this._iconView.visible = true;
+      this._indicatorView.text = text.replace('[[BTCICON]]', '').trim();
+    } else {
+      // Hide the icon and show normal text
+      this._iconView.visible = false;
+      this._indicatorView.text = text;
+    }
   }
 
   _updatePopupItemLabel(err?) {
@@ -173,6 +195,7 @@ class MarketIndicatorView extends PanelMenu.Button {
   destroy() {
     this._indicatorView.destroy();
     this._statusView.destroy();
+    this._iconView.destroy();
     super.destroy();
   }
 }

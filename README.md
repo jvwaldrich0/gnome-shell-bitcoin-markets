@@ -64,11 +64,12 @@ gnome-tweak-tool.
 
 ### Base options
 
-| option | result                                       |
-| ------ | -------------------------------------------- |
-| b      | base currency code                           |
-| bs     | base currency symbol \|\| base currency code |
-| btc    | btc symbol                                   |
+| option  | result                                       |
+| ------- | -------------------------------------------- |
+| b       | base currency code                           |
+| bs      | base currency symbol \|\| base currency code |
+| btc     | btc symbol                                   |
+| btcicon | bitcoin icon (₿)                             |
 
 ### Value options
 
